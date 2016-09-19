@@ -21,5 +21,7 @@ public class Student {
 	
 	public void walk(){
 		System.out.println("Hi I am " + name);
-	}	
+	}
+	
+	//(Student)jillian.talk();
 }

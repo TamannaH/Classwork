@@ -3,6 +3,7 @@ package introduction;
 public class DataTypes {
 
 	public static void main(String[] args) {
+				
 		double d1 = 4.64; 
 		double d2 = 2.0;
 		double d3 = 2.64;
@@ -15,5 +16,16 @@ public class DataTypes {
 		int m = 22;
 		int n = 7;
 		System.out.println("m/n is "+((double)m/n));
+		
+		String ten = "10";
+		String two = "2";
+		
+		if (ten.compareTo(two) > 0){
+			System.out.println("10 is greater than 2");
+		}else 
+		{
+			System.out.println("10 is not greater than 2");
+		}
+		
 	}
 }

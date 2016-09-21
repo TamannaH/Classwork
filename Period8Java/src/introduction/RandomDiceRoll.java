@@ -1,15 +1,16 @@
 package introduction;
 
-public class RandomDiceRoll {
+public class RandomDiceRoll{
 
 	public static void main(String[] args) {
 		
 		int[] results = new int[6]; //fills the array with 6 zeroes
+		
 		//declared variable, logic test, increment
 		for (int index = 0; index < 1000; index++)
 		{
 			int result = rollFairDie();
-			System.out.println("Roll #"+(index+1)+": "+rollFairDie());
+			System.out.println("Roll #" + (index + 1) + ": " + rollFairDie());
 			results[result-1]++;
 		}
 		//print the results
@@ -27,7 +28,6 @@ public class RandomDiceRoll {
 		roll++; //[1.6]
 		return roll;
 	}
-	
 	
 	public static int rollUnfairDie(){
 		double rand = Math.random();

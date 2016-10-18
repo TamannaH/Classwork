@@ -23,36 +23,48 @@ public class ArraysPractice {
 		int[] fiftyNumbers = new int[50];
 		populate(fiftyNumbers);
 		print(fiftyNumbers);
-		randomize(fiftyNumbers);
+		randomize(fiftyNumbers, 50);
 		print(fiftyNumbers);
-		rollDice(fiftyNumbers);
+		rollDice(fiftyNumbers, 2);
 		print(fiftyNumbers);
 		//count each die roll and provide a percentage
-		countResult(fiftyNumbers);
+		countResult(fiftyNumbers, 3);
+		print(fiftyNumbers);
 		
 		long endTime = System.currentTimeMillis();
 		System.out.println("The process took " + (endTime - currentTime) + " ms.");
 	}
 	
-	private static void countResult(int[] fiftyNumbers) {
-		// TODO Auto-generated method stub
+	private static void countResult(int[] fiftyNumbers, int numberOfDice) {
+		//count each die roll and provide a percentage
+		System.out.println("countResult method");
+		int[] counter = new int[12];
 		
-	}
-
-	private static void rollDice(int[] fiftyNumbers) {
-		System.out.println("rollDice method");
-		//Populate an array with the roll of two dice
-		for (int i = 0; i < fiftyNumbers.length; i++){
-			int dice1 = (int)(1+6*Math.random());
-			int dice2 = (int)(1+6*Math.random());
-			fiftyNumbers[i] = dice1+dice2;
+		for (int n: fiftyNumbers){
+			counter[n-1] = counter[n-1] + 1;
+		}
+		
+		for (int i = 0; i < counter.length; i++){
+			System.out.println((i + 1) + " was rolled " + 100*counter[i]/fiftyNumbers.length + " percent of the time.");
 		}
 	}
 
-	private static void randomize(int[] fiftyNumbers) {
+	private static void rollDice(int[] fiftyNumbers, int numberOfDice) {
+		System.out.println("rollDice method");
+		//Populate an array with the roll of two dice
+		for (int i = 0; i < fiftyNumbers.length; i++){
+			int dice = 0;
+			for (int j = 0; j < numberOfDice; j++){
+				dice = dice + (int)(1+6*Math.random());
+				fiftyNumbers[i] = dice;
+			}
+		}
+	}
+
+	private static void randomize(int[] fiftyNumbers, int max) {
 		System.out.println("randomize method");
 		for (int i = 0; i < fiftyNumbers.length; i++){
-			int randomNumber = (int) (1+(50*Math.random()));
+			int randomNumber = (int) (1+(max*Math.random()));
 			fiftyNumbers[i] = randomNumber;
 		}
 	}

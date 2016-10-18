@@ -16,6 +16,53 @@ public class ArraysPractice {
 	static boolean[] boos3;
 	
 	public static void main(String[] args) {
+		//how do you time a process?
+		long currentTime = System.currentTimeMillis();
+		String[] someStrings = new String[1000];
+		standardPopulate(someStrings);
+		String s = someStrings[999];
+		makeSpecial(s);
+		print(someStrings);
+		//long is an integer that takes up more memory than an int
+		//time is measured in long
+		long endTime = System.currentTimeMillis();
+		System.out.println("The process took " + (endTime - currentTime) + " ms.");
+	}
+	
+	private static void makeSpecial(String s) {
+		s = "THIS STRING IS SPECIAL!";
+	}
+
+	private static void print(String[] s) {
+		for (int i = 0; i < s.length; i++){
+			System.out.println(s[i]);
+		}
+		
+	}
+
+	private static void standardPopulate(String[] s) {
+		/*int i = 0;
+		
+		for(String x: s){
+			i++;
+			x = "String #" + i;
+		}*/
+		
+		for (int i = 0; i < s.length; i++){
+			String string = "String #" + (i+1);
+			string = s[i];
+		}
+	}
+
+	public static void initializingArraysExample(){
+		/**Primitive Type[]
+		 * primitive types are "already" in the system
+		 * cannot mix types
+		 * 
+		 * Object[]
+		 * unless initialized, start as null
+		 * different types of objects in an array of common super class
+		*/
 		
 		//two different ways to instantiate an array
 		boolean[] boos1 = new boolean[3];

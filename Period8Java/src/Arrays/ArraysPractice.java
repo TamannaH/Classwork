@@ -11,46 +11,109 @@ public class ArraysPractice {
 		indexed (ordered)
 		common data type (ex. "Student[]")
 		arrays of any type must be Object[]
+		
+	Pass-by-value: changes the assignment, not the value
  */
 	
 	static boolean[] boos3;
 	
 	public static void main(String[] args) {
+		long currentTime = System.currentTimeMillis();
+		
+		int[] fiftyNumbers = new int[50];
+		populate(fiftyNumbers);
+		print(fiftyNumbers);
+		randomize(fiftyNumbers);
+		print(fiftyNumbers);
+		rollDice(fiftyNumbers);
+		print(fiftyNumbers);
+		//count each die roll and provide a percentage
+		countResult(fiftyNumbers);
+		
+		long endTime = System.currentTimeMillis();
+		System.out.println("The process took " + (endTime - currentTime) + " ms.");
+	}
+	
+	private static void countResult(int[] fiftyNumbers) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void rollDice(int[] fiftyNumbers) {
+		System.out.println("rollDice method");
+		//Populate an array with the roll of two dice
+		for (int i = 0; i < fiftyNumbers.length; i++){
+			int dice1 = (int)(1+6*Math.random());
+			int dice2 = (int)(1+6*Math.random());
+			fiftyNumbers[i] = dice1+dice2;
+		}
+	}
+
+	private static void randomize(int[] fiftyNumbers) {
+		System.out.println("randomize method");
+		for (int i = 0; i < fiftyNumbers.length; i++){
+			int randomNumber = (int) (1+(50*Math.random()));
+			fiftyNumbers[i] = randomNumber;
+		}
+	}
+
+	private static void print(int[] fiftyNumbers) {
+		for (int i = 0; i < fiftyNumbers.length; i++){
+			System.out.println(fiftyNumbers[i]);
+		}
+		
+	}
+
+	private static void populate(int[] fiftyNumbers) {
+		System.out.println("populate method");
+		//Populate and print an array with the numbers 1 - 50.
+		for (int i = 0; i < fiftyNumbers.length; i++){
+			fiftyNumbers[i] = i+1;
+		}
+	}
+/*
+	private void demonstratePassByValue(){
+		
 		//how do you time a process?
 		long currentTime = System.currentTimeMillis();
 		String[] someStrings = new String[1000];
 		standardPopulate(someStrings);
 		String s = someStrings[999];
 		makeSpecial(s);
+		someStrings[999] = getASpecialString(s);
 		print(someStrings);
 		//long is an integer that takes up more memory than an int
 		//time is measured in long
 		long endTime = System.currentTimeMillis();
 		System.out.println("The process took " + (endTime - currentTime) + " ms.");
-	}
-	
-	private static void makeSpecial(String s) {
-		s = "THIS STRING IS SPECIAL!";
-	}
-
-	private static void print(String[] s) {
-		for (int i = 0; i < s.length; i++){
-			System.out.println(s[i]);
+		
+		private static String getASpecialString(String s) {
+			return "THIS STRING IS SPECIAL!";
 		}
-		
-	}
 
-	private static void standardPopulate(String[] s) {
-		/*int i = 0;
-		
-		for(String x: s){
-			i++;
-			x = "String #" + i;
-		}*/
-		
-		for (int i = 0; i < s.length; i++){
-			String string = "String #" + (i+1);
-			string = s[i];
+		private static void makeSpecial(String s) {
+			s = "THIS STRING IS SPECIAL!";
+		}
+
+		private static void print(String[] s) {
+			for (int i = 0; i < s.length; i++){
+				System.out.println(s[i]);
+			}
+			
+		}
+
+		private static void standardPopulate(String[] s) {
+			/*int i = 0;
+			
+			for(String x: s){
+				i++;
+				x = "String #" + i;
+			}*/
+			/*
+			for (int i = 0; i < s.length; i++){
+				String string = "String #" + (i+1);
+				string = s[i];
+			}
 		}
 	}
 
@@ -63,7 +126,7 @@ public class ArraysPractice {
 		 * unless initialized, start as null
 		 * different types of objects in an array of common super class
 		*/
-		
+		/*
 		//two different ways to instantiate an array
 		boolean[] boos1 = new boolean[3];
 		//this can only be done at the declaration because it sets size AND content:
@@ -79,7 +142,7 @@ public class ArraysPractice {
 			-the index is important to keep track of
 			-you need to customize the order
 		*/
-		
+		/*
 		for(int i = 0; i < boos1.length; i++){
 			System.out.println(boos1[i]);
 		}
@@ -91,7 +154,7 @@ public class ArraysPractice {
 		 * 		-automatically assigns a "handle"
 		 * 		-faster
 		 */
-		
+		/*
 		for(boolean b: boos1){
 			System.out.println(b);
 		}
@@ -125,7 +188,5 @@ public class ArraysPractice {
 			System.out.println(a);
 		}
 		
-		*/
+	*/	
 	}
-
-}

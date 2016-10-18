@@ -27,6 +27,7 @@ public class ArraysPractice {
 		print(fiftyNumbers);
 		rollDice(fiftyNumbers, 2);
 		print(fiftyNumbers);
+		
 		//count each die roll and provide a percentage
 		countResult(fiftyNumbers, 3);
 		print(fiftyNumbers);
@@ -38,13 +39,13 @@ public class ArraysPractice {
 	private static void countResult(int[] fiftyNumbers, int numberOfDice) {
 		//count each die roll and provide a percentage
 		System.out.println("countResult method");
-		int[] counter = new int[12];
+		int[] counter = new int[numberOfDice*6];
 		
 		for (int n: fiftyNumbers){
 			counter[n-1] = counter[n-1] + 1;
 		}
 		
-		for (int i = 0; i < counter.length; i++){
+		for (int i = numberOfDice; i < counter.length; i++){
 			System.out.println((i + 1) + " was rolled " + 100*counter[i]/fiftyNumbers.length + " percent of the time.");
 		}
 	}

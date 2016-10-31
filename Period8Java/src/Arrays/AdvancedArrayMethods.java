@@ -21,7 +21,7 @@ public class AdvancedArrayMethods {
 		*/
 	}
 
-	private static void shuffle(String[] array) {
+	private static void shuffle(Object[] array) {
 		for(int i = 0; i < array.length; i++){
 			int random = (int)(Math.random()*6);
 			swap(array, i, random);
@@ -42,7 +42,7 @@ public class AdvancedArrayMethods {
 	public static void copyArray(int[] original, int[] target){
 		
 		if(original.length == target.length){
-			for(int i =0; i < original.length; i++){
+			for(int i = 0; i < original.length; i++){
 				target[i] = original[i];
 			}
 		}else{

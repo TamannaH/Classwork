@@ -14,7 +14,7 @@ public class CaveExplorer {
 		caves = new CaveRoom[5][5];
 		
 		for (int row = 0; row < caves.length; row++){
-			for (int cosl = 0; col < caves[row].length; col++){
+			for (int col = 0; col < caves[row].length; col++){
 				caves[row][col] = new CaveRoom("This room has coordinates " + row + ", " + col);
 			}
 		}

@@ -21,5 +21,4 @@ public class Inventory {
 			return "You have no inventory.";
 		}
 	}
-
 }

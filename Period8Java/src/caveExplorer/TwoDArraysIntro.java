@@ -8,24 +8,19 @@ public class TwoDArraysIntro{
 	static String[][] arr2D;
 	static int starti;
 	static int startj;
-	public static Scanner in;
+	public static Scanner in = new Scanner(System.in);
 	static int treasurei;
 	static int treasurej;
 	static String[][] pic;
 	
 	public static void main(String[] args){
+		//arr2D = new String[5][5];
+		pic = new String[5][5];
 		
-//		String[][] mines = new String[6][6];
-//		//plantMines(mines);
-//		picMaking(mines);
-//		
-//		//printPic(field);
-//		
-//		//picMaking(mines);
-		in = new Scanner(System.in);
-		arr2D = new String[5][5];
+		String[][] arr2D = new String[16][21];
+		
 		for(int row = 0; row < arr2D.length; row++){
-//		populate with coordinates
+		//populate with coordinates
 			for(int col = 0; col < arr2D[row].length; col++){
 				arr2D[row][col] = "(" + row + ", " + col + ")";
 			}
@@ -33,16 +28,19 @@ public class TwoDArraysIntro{
 		
 		starti = 2;
 		startj = 2;
+		
 		treasurei = 4;
 		treasurej = 3;
-		pic = new String[5][5];
 		
-		startExploring();
+		arr2D = makeGrid(arr2D);
+		printPic(arr2D);
+		
+		//startExploring();
 	}
 	
 	private static void startExploring(){
+		printPic(pic);
 		while(true){
-			printPic(pic);
 			System.out.println("You are in room " + arr2D[starti][startj] + ".");
 			
 			if(starti == treasurei && startj == treasurej){
@@ -71,6 +69,7 @@ public class TwoDArraysIntro{
 		int currentj = starti;
 		int currenti = startj;
 		
+		/*
 		for(int r = 0; r < pic.length; r++){
 			for(int c = 0; c < pic[r].length; c++){
 				System.out.println(" ");
@@ -78,7 +77,7 @@ public class TwoDArraysIntro{
 					System.out.println("X");
 				}
 			}
-		}
+		}*/
 		
 		input = input.toLowerCase();
 		if(input.equals("w")) currenti--;
@@ -106,8 +105,15 @@ public class TwoDArraysIntro{
 		}
 		return false;
 	}
+	
+	public static void mineGame(){
 
-	/*
+		boolean[][] mines = new boolean[6][6];
+		plantMines(mines);
+		String[][] field = createField(mines);
+		print(field);
+	}
+	
 	private static String[][] createField(boolean[][] mines) {
 		String[][] field = new String[mines.length][mines[0].length];
 		
@@ -120,23 +126,24 @@ public class TwoDArraysIntro{
 				}
 			}
 		}
-		
 		return field;
 	}
 
 	
 	private static String countNearby(boolean[][] mines, int row, int col) {
-		for(int r = row - 1; r <= row + 1; r++){
-			for(int c = col - 1; c <= col + 1; c++){
-				//check that this element exists
-				if(r >= 0 && r < mines.length && c >= 0 && c < mines[0].length){
-					
-				}
-			}
-		}
-		return null;
 		
-		//this method ONLY considers actual elements
+		//Method 1:
+//		for(int r = row - 1; r <= row + 1; r++){
+//			for(int c = col - 1; c <= col + 1; c++){
+//				//check that this element exists
+//				if(r >= 0 && r < mines.length && c >= 0 && c < mines[0].length){
+//					
+//				}
+//			}
+//		}
+//		return null;
+		
+		//Method 2: this method ONLY considers actual elements
 //		int count = 0;
 //		for (int r = 0; r < mines.length; r++){
 //			for (int c = 0; c < mines[r].length; c++){
@@ -147,7 +154,7 @@ public class TwoDArraysIntro{
 //		}
 //		return "" + count;
 		
-		//this method allows you to be most specific
+		//Method 3: this method allows you to be most specific
 		//for example, you only want North and East
 		int count = 0;
 		count += isValidAndTrue(mines, row - 1, col);
@@ -157,13 +164,14 @@ public class TwoDArraysIntro{
 		
 		return "" + count;
 	}
-
-//	private static int isValidAndTrue(boolean[][] mines, int i, int col) {
-//		if (i >= 0 && i < mines.length && col >= 0 && col < mines[0].length && mines[i][col]){
-//			return 1;
-//		}
-//		return 0;
-//	}
+	
+	private static int isValidAndTrue(boolean[][] mines, int i, int col) {
+		if (i >= 0 && i < mines.length && col >= 0 && col < mines[0].length && mines[i][col]){
+			return 1;
+		}
+		return 0;
+	}
+	
 
 	private static void plantMines(boolean[][] mines) {
 		int numberOfMines = 10;
@@ -176,45 +184,34 @@ public class TwoDArraysIntro{
 				row = (int)(Math.random() * mines.length);
 				col = (int)(Math.random() * mines[0].length);
 			}
+			
+			if(!mines[row][col]){
+				mines[row][col] = true;
+				numberOfMines--;
+			}
 		}
 	}
-*/
-	public static void picMaking(String[][] mines){
-		//String[] xox = {"x", "o", "x", "o", "x"};
-		//System.out.println(Arrays.toString(xox));
-		//a 1D array prints a horizontal string
+	
+	public static void print(String[][] pic){
+		for(String[] row:pic){
+			for(String col:row){
+				
+				System.out.print(col);
+			}
+			System.out.println();
+		}
+	}
+	
+	private static String[][] makeGrid(String[][] grid) {
+	
+		/*
+		for(int row = 0; row < pic.length; row++){
+			//populate with coordinates
+			for(int col = 0; col < pic[row].length; col++){
+				pic[row][col] = " ";
+			}
+		}
 		
-		//String[][] arr2D = new String[4][4];
-		
-//		String[][] arr2D = new String[5][4];
-//		System.out.println("The height is " + arr2D.length);
-//		System.out.println("The width is " + arr2D[0].length);
-//		//5 is the row and the column is 4
-//		
-//		for(int row = 0; row < arr2D.length; row++){
-//			//populate with coordinates
-//			for(int col = 0; col < arr2D[row].length; col++){
-//				arr2D[row][col] = "(" + row + ", " + col + ")";
-//			}
-//		}
-		//print the 2D array
-		//Every element in a 2D array IS itself an array,
-		//so a for-each loop looks like this:
-//		for(String[] row : arr2D){
-//			System.out.println(Arrays.toString(row));
-//		}
-		
-		CaveRoom[][] caves = CaveExplorer.caves;
-		//convert these caves to a string representation
-		
-		String[][] pic = new String[8][8];
-		
-//		for (int row = 0; row < pic.length; row++){
-//			for(int col = 0; col < pic[row].length; col++){
-//				pic[row][col] = " ";
-//			}
-//		}
-//		
 		//sun
 		pic[1][3] = "O";
 		pic[2][3] = "|";
@@ -229,19 +226,76 @@ public class TwoDArraysIntro{
 			}
 		}
 		
-		//top row and bottom row should be "_"
-		for(int col = 0; col < pic[0].length; col++){
-			pic[0][col] = "_";
-			pic[pic.length - 1][col] = "_";
+		//top and bottom row should be "_"
+		for(int col=1;col<pic[0].length;col++){
+			for(int row=1;row<pic.length;row++){
+				if(row%3==0)
+					pic[row][col]="_";
+			}
+			pic[0][col-1]="_";
+			pic[pic.length-1][col]="_";
 		}
 		
-		//first and last col should be "|"
-		for(int row = 1; row < pic.length; row++){
-			pic[row][0] = "|";
-			pic[row][pic[0].length - 1] = "|";
+		for(int row =1; row<pic.length;row++){
+			for(int col=0;col<pic[0].length-1;col++){
+					if(col%4==0)
+						pic[row][col]="|";
+			}
+//			pic[row][0]="|";
+			pic[row][pic[row].length-1]="|";
 		}
 		
-		//printPic(pic);
+		for(String[] row:pic){
+			for(String col:row){
+				
+				System.out.print(col);
+			}
+			System.out.println();
+		}
+		*/
+		
+		for(int row = 0; row < grid.length; row++){
+			for(int col = 0; col < grid[row].length; col++){
+				if(row == 0){
+					grid[row][col] = "_";
+				}
+				else if(col % 4 == 0){
+					grid[row][col] = "|";
+				}
+				else if(row % 3 == 0){
+					grid[row][col] = "_";
+				}
+				else{
+					grid[row][col] = " ";
+				}
+			}
+		}
+		return grid;
+	}
+	
+	public static void picMakingIntro(String[][] mines){
+		//a 1D array prints a horizontal string
+		String[] xox = {"x", "o", "x", "o", "x"};
+		System.out.println(Arrays.toString(xox));
+		
+		String[][] arr2D = new String[5][4];
+		
+		System.out.println("The height is " + arr2D.length);
+		System.out.println("The width is " + arr2D[0].length);
+		//5 is the row and the column is 4
+		
+		for(int row = 0; row < arr2D.length; row++){
+			//populate with coordinates
+			for(int col = 0; col < arr2D[row].length; col++){
+				arr2D[row][col] = "(" + row + ", " + col + ")";
+			}
+		}
+		//print the 2D array
+		//Every element in a 2D array IS itself an array,
+		//so a for-each loop looks like this:
+		for(String[] row : arr2D){
+			System.out.println(Arrays.toString(row));
+		}
 	}
 	
 	public static void printPic(String[][] pic){

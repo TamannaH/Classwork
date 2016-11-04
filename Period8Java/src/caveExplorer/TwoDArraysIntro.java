@@ -131,7 +131,6 @@ public class TwoDArraysIntro{
 
 	
 	private static String countNearby(boolean[][] mines, int row, int col) {
-		
 		//Method 1:
 //		for(int r = row - 1; r <= row + 1; r++){
 //			for(int c = col - 1; c <= col + 1; c++){

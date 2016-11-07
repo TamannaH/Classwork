@@ -13,12 +13,16 @@ public class CaveExplorer {
 		in = new Scanner(System.in);
 		caves = new CaveRoom[5][5];
 		
+		//all of the rooms
 		for (int row = 0; row < caves.length; row++){
 			for (int col = 0; col < caves[row].length; col++){
 				caves[row][col] = new CaveRoom("This room has coordinates " + row + ", " + col);
 			}
 		}
 		currentRoom = caves[1][2];
+		
+		//special event room
+		caves[1][3] = new EventRoom("This is where you found the map.", new GameStartEvent());
 		currentRoom.enter();
 		caves[1][2].setConnection(CaveRoom.WEST, caves[1][1], new Door());
 		caves[1][2].setConnection(CaveRoom.SOUTH, caves[2][2], new Door());
@@ -36,12 +40,8 @@ public class CaveExplorer {
 			print("What would you like to do?");
 			String input = in.nextLine();
 			
-			act(input);
+			currentRoom.interpretAction(input);
 		}
-	}
-	
-	private static void act(String input) {
-		currentRoom.interpretAction(input);
 	}
 
 	public static void print(String text){

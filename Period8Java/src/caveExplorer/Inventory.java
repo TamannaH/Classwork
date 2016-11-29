@@ -32,13 +32,17 @@ public class Inventory {
 				for(CaveRoom cr : row){
 					String str = "|   ";
 					String contents = cr.getContents();
-					if (textRow == 1 && cr.getDoor(CaveRoom.WEST) != null){
-						str = " " + contents + " ";
-					}else if(textRow == 2){
-						if(cr.getDoor(CaveRoom.SOUTH) == null){
-							str = "|___";
+					if (textRow == 1){
+						if (cr.getDoor(CaveRoom.WEST) != null && cr.getDoor(CaveRoom.WEST).isOpen()){
+							str = " " + contents + " ";
 						}else{
+							str = "| " + contents + " ";
+						}
+					}else if(textRow == 2){
+						if(cr.getDoor(CaveRoom.SOUTH) != null && cr.getDoor(CaveRoom.SOUTH).isOpen()){
 							str = "|_ _";
+						}else{
+							str = "|___";
 						}
 					}
 					map += str;

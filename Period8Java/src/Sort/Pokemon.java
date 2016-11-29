@@ -62,4 +62,8 @@ public class Pokemon {
 	public void setPoisoned(boolean b) {
 		poisoned = b;
 	}
+
+	public String getName() {
+		return name;
+	}
 }

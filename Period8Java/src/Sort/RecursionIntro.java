@@ -5,6 +5,8 @@ public class RecursionIntro {
 	public static void main(String[] args) {
 		int n = 5;
 		System.out.println("The " + n +"th Fibonacci is " + fibonacci(n));
+		
+		//T(n) = O(2^n)
 		//hanoiSolution(3, "A", "B", "C");
 		
 //		System.out.println("Using a for loop.");

@@ -35,8 +35,11 @@ public class TextLabel extends Component {
 	public void update(Graphics2D g) {
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setColor(Color.black);
-		g.setFont(new Font(font, Font.PLAIN, size));
+		if(text != null){
+			g.setFont(new Font(font, Font.PLAIN, size));
 		g.drawString(text, 4, getHeight()-5);
 	}
+}
+		
 
 }

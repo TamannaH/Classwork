@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -42,8 +44,11 @@ public abstract class Screen {
 		//this is where you draw stuff
 		Graphics2D g = image.createGraphics();
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		//make background
+		g.setColor(Color.white);
+		g.fillRect(0, 0, image.getWidth(), image.getHeight());
 		g.setColor(Color.black);
-		
+				
 		//draw all visible components
 		for(Visible v: viewObjects){
 			g.drawImage(v.getImage(), v.getX(), v.getY(), null);
@@ -64,5 +69,13 @@ public abstract class Screen {
 	
 	public BufferedImage getImage() {
 		return image;
+	}
+
+	public MouseListener getMouseListener() {
+		return null;
+	}
+
+	public MouseMotionListener getMouseMotionListener() {
+		return null;
 	}
 }

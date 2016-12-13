@@ -7,7 +7,10 @@ public class MouseFollower extends guiApplication {
 	private CoordinateScreen cordScreen;
 	
 	public static void main(String[] args){
-		new MouseFollower();
+		guiApplication game = new MouseFollower();
+		Thread app = new Thread(game);
+		app.start();
+		
 	}
 	
 	protected void initScreen() {

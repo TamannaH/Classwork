@@ -1,55 +1,99 @@
 package guiPackage.components;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class Button extends TextLabel implements Clickable{
-	
-	/*
-	 * Go back to the Button class and make Button implement Clickable.
-	 *  Create the isHovered and act() methods. 
-	 *  isHovered() should return true if the parameters int x and
-	 *   int y are values between the Button's x value and x+width value and y and y+height,
-	 *    respectively. Keep in mind these are private fields (this.x and this.y) so
-	 *     you will have to access them using the getters. The act() method is simple, 
-	 *     it calls act() on the Button's action (The field you made in step 3)
-	 */
+public class Button extends TextLabel implements Clickable, MouseListener{
 
 	private Color color;
-	private Action act;
-	private int x;
-	private int y;
-	private int w;
-	private int h;
+	private Action action;
+	private String text;
 	
-	public Button(int x, int y, int w, int h, String text, Color color, Action act) {
-		super(x, y, w, h, text);		
+	public Button(int x, int y, int w, int h, String text, Color color, Action action) {
+		super(x, y, w, h, text);
 		this.color = color;
-		this.act = act;
-	
-		this.w = w;
-		this.h = h;
+		this.action = action;
+		this.text = text;
+		update();
 	}
 	
-	public int getX() {
-		return x;
+	public Color getColor(){
+		return color;
 	}
 	
-	public int getY() {
-		return y;
+	public void setColor(Color c){
+		color = c;
+		//updating the picture
+		update();
 	}
 	
 	public void update(Graphics2D g) {
-		//g.setFont(new Font("Helvetica", Font.PLAIN, 20));
-		g.drawRoundRect(10, 120, 25, 5, 25, 25);
-		g.fillRoundRect(10, 120, 25, 5, 25, 25);
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g.setColor(color);
+		g.fillRoundRect(0, 0, getWidth(), getHeight(), 25, 35);
+		g.setColor(Color.BLACK);
+		g.drawRoundRect(0, 0, getWidth()-1, getHeight(), 25, 35);	
+		if(text != null){
+//			g.setColor(Color.white);
+//			String t = getText();
+//			int cutoff = t.length();
+//			while (cutoff > 0 && fm.stringWidth(t) > getWidth()){
+//				cutoff--;
+//				t = t.substring(0, cutoff);
+//			}
+			g.setFont(new Font(getFont(), Font.PLAIN,getSize()));
+			g.drawString(text, 4, getHeight()-5);
+		}
+			
+	}
+
+	public boolean isHovered(int x, int y) {
+		if(x>getX()&&x<getX()+getWidth()&&y>getY()&&y<getY()+getHeight())
+			return true;
+		return false;
+	}
+	
+	public void act(){
+		action.act();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (isHovered(e.getX(), e.getY())){
+			act();
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 	
-	public boolean isHovered(int xcor, int ycor){
-		if ((xcor < getX() && xcor < getX() + w) && (ycor < getY() && ycor < getY() + h)){
-			return true;
-		}
-		return false;
+	public MouseListener getMouseListener() {
+		return this;
 	}
 }

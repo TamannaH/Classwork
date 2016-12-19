@@ -1,18 +1,27 @@
 package guiPackage.sampleGames;
 
+import guiPackage.components.Button;
+import guiPackage.components.Graphic;
+
+import java.awt.Color;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+
+import guiPackage.components.Action;
 
 import guiPackage.Screen;
 import guiPackage.components.TextArea;
 import guiPackage.components.TextLabel;
 import guiPackage.components.Visible;
 
-public class CoordinateScreen extends Screen implements MouseMotionListener{
+public class CoordinateScreen extends Screen implements MouseMotionListener, MouseListener{
 
 	private TextLabel label;
 	private TextArea paragraph;
+	private Button button;
+	private Graphic picture;
 	
 	public CoordinateScreen(int width, int height) {
 		super(width, height);
@@ -21,13 +30,22 @@ public class CoordinateScreen extends Screen implements MouseMotionListener{
 	@Override
 	public void initObjects(ArrayList<Visible> viewObjects) {
 		label = new TextLabel(40,45,760,40,"Sample Text");
-		paragraph = new TextArea(40,85,500,500,
-				"This is a whole paragraph. Notice how "
-				+ "as the paragraph gets to the edge"
-				+ " of the page, a new line is created.");
-		viewObjects.add(label);
-		viewObjects.add(paragraph);
+//		paragraph = new TextArea(40,85,500,500,
+//				"This is a whole paragraph. Notice how "
+//				+ "as the paragraph gets to the edge"
+//				+ " of the page, a new line is created.");
+		//viewObjects.add(paragraph);
+		button = new Button(40, 200, 80, 40, "Button", new Color(100, 100, 250), new Action() {
+			public void act() {
+				MouseFollower.game.setScreen(MouseFollower.myScreen);
+			}
+		});
 		
+		picture = new Graphic(50, 50, .5, "resources/sampleImages/minion.jpg");
+		viewObjects.add(picture);
+		viewObjects.add(label);
+		button.setSize(12);
+		viewObjects.add(button);
 	}
 
 	@Override
@@ -56,6 +74,37 @@ public class CoordinateScreen extends Screen implements MouseMotionListener{
 	//overrides method to activate mouseMotionListener
 	public MouseMotionListener getMouseMotionListener(){
 		return this;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if(button.isHovered(e.getX(), e.getY())){
+			button.act();
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

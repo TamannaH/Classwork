@@ -1,7 +1,10 @@
 package guiPackage.sampleGames;
 
 import guiPackage.components.Button;
+<<<<<<< HEAD
 import guiPackage.components.Graphic;
+=======
+>>>>>>> refs/remotes/origin/master
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -9,7 +12,11 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
+<<<<<<< HEAD
 import guiPackage.components.Action;
+=======
+import javax.swing.Action;
+>>>>>>> refs/remotes/origin/master
 
 import guiPackage.Screen;
 import guiPackage.components.TextArea;
@@ -20,8 +27,12 @@ public class CoordinateScreen extends Screen implements MouseMotionListener, Mou
 
 	private TextLabel label;
 	private TextArea paragraph;
+<<<<<<< HEAD
 	private Button button;
 	private Graphic picture;
+=======
+	private Button goToFollower;
+>>>>>>> refs/remotes/origin/master
 	
 	public CoordinateScreen(int width, int height) {
 		super(width, height);
@@ -35,17 +46,30 @@ public class CoordinateScreen extends Screen implements MouseMotionListener, Mou
 //				+ "as the paragraph gets to the edge"
 //				+ " of the page, a new line is created.");
 		//viewObjects.add(paragraph);
+<<<<<<< HEAD
 		button = new Button(40, 200, 80, 40, "Button", new Color(100, 100, 250), new Action() {
 			public void act() {
 				MouseFollower.game.setScreen(MouseFollower.myScreen);
+=======
+		goToFollower = Button(40, 50, 100, 30, "Button", new Color(0, 80, 150), new Action()) {
+				
+			public void act() {
+				
+>>>>>>> refs/remotes/origin/master
 			}
 		});
 		
+<<<<<<< HEAD
 		picture = new Graphic(50, 50, .5, "resources/sampleImages/minion.jpg");
 		viewObjects.add(picture);
 		viewObjects.add(label);
 		button.setSize(12);
 		viewObjects.add(button);
+=======
+		goToFollower.setSize(12);
+		viewObjects.add(label);
+		viewObjects.add(goToFollower);
+>>>>>>> refs/remotes/origin/master
 	}
 
 	@Override

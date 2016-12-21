@@ -8,7 +8,7 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class Button extends TextLabel implements Clickable, MouseListener{
+public class Button extends TextLabel implements Clickable{
 
 	private Color color;
 	private Action action;
@@ -60,40 +60,5 @@ public class Button extends TextLabel implements Clickable, MouseListener{
 	
 	public void act(){
 		action.act();
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		if (isHovered(e.getX(), e.getY())){
-			act();
-		}
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public MouseListener getMouseListener() {
-		return this;
 	}
 }

@@ -1,15 +1,13 @@
 package guiPackage.components;
 
 import java.awt.Color;
+
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-<<<<<<< HEAD
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-=======
->>>>>>> refs/remotes/origin/master
 
 public class Button extends TextLabel implements Clickable{
 
@@ -31,16 +29,13 @@ public class Button extends TextLabel implements Clickable{
 	
 	public void setColor(Color c){
 		color = c;
-<<<<<<< HEAD
 		//updating the picture
-=======
->>>>>>> refs/remotes/origin/master
+
 		update();
 	}
 	
 	public void update(Graphics2D g) {
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-<<<<<<< HEAD
 		g.setColor(color);
 		g.fillRoundRect(0, 0, getWidth(), getHeight(), 25, 35);
 		g.setColor(Color.BLACK);
@@ -63,7 +58,6 @@ public class Button extends TextLabel implements Clickable{
 		if(x>getX()&&x<getX()+getWidth()&&y>getY()&&y<getY()+getHeight())
 			return true;
 		return false;
-=======
 		g.setColor(Color.BLACK);
 		if(text!=null){
 			g.setFont(new Font(getFont(), Font.PLAIN,getSize()));
@@ -72,17 +66,6 @@ public class Button extends TextLabel implements Clickable{
 		g.drawRoundRect(getX(), getY(), getWidth(), getHeight(), 25, 35);
 		g.setColor(color);
 		g.fillRoundRect(getX(), getY(), getWidth(), getHeight(), 25, 35);
-	}
-
-	public boolean isHovered(int x, int y) {
-		if(x>getX()&&x<getX()+getWidth()&&y>getY()&&y<getY()+getHeight())
-			return true;
-		return false;
-	}
-	
-	public void act(){
-		action.act();
->>>>>>> refs/remotes/origin/master
 	}
 	
 	public void act(){

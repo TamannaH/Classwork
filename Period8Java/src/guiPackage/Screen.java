@@ -138,7 +138,6 @@ public abstract class Screen {
 	}
 
 	public void addObject(Visible v) {
-		// TODO Auto-generated method stub
-		
+		viewObjects.add(v);
 	}
 }

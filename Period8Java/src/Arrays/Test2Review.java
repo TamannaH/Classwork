@@ -43,7 +43,7 @@ public class Test2Review {
 		//check if a single light is on
 		for(int row = 0; row < grid.length; row++){
 			for(int col = 0; col < grid[row].length; col++){
-				if(grid[row][col])return;
+				if(grid[row][col]) return;
 			}
 		}
 		System.out.println("You have solved the puzzle!");

@@ -15,18 +15,42 @@ public abstract class ClickableScreen extends Screen implements MouseListener{
 	
 	public ClickableScreen(int width, int height) {
 		super(width, height);
-		// TODO Auto-generated constructor stub
 	}
+	
+	public abstract void initAllObjects(ArrayList<Visible> viewObjects);
+	
+	public void initObjects(ArrayList<Visible> viewObjects) {
+		initAllObjects(viewObjects);
+		clickables = new ArrayList<Clickable>();
+
+		for(int i = 0; i < viewObjects.size(); i++){
+			if(viewObjects.get(i) instanceof Clickable){
+				clickables.add((Clickable)viewObjects.get(i));
+			}
+		}
+	}
+
+	 public void addObject(Visible v){
+		 super.addObject(v);
+		 if(v instanceof Clickable){
+		 clickables.add((Clickable) v);
+		 }
+	}
+
+	 public void remove(Visible v){
+		 super.remove(v);
+		 clickables.remove((Clickable) v);
+	} 
 	
 	public MouseListener getMouseListener(){
 		return this;
 	}
 	
-	@Override
 	public void mouseClicked(MouseEvent e) {
-		for(int i = 0; i < clickables.size(); i++){
-			if(isHovered(clickables[i].getX(), clickables[i].getY())){
-				act();
+		for(Clickable c: clickables){
+			if(c.isHovered(e.getX(), e.getY())){
+				c.act();
+				break;
 			}
 		}
 	}
@@ -54,19 +78,4 @@ public abstract class ClickableScreen extends Screen implements MouseListener{
 		// TODO Auto-generated method stub
 
 	}
-
-	@Override
-	public void initObjects(ArrayList<Visible> viewObjects) {
-		initAllObjects(viewObjects);
-		clickables = new ArrayList<Clickable>();
-
-		for(int i = 0; i < viewObjects.size(); i++){
-			if(viewObjects.get(i) instanceof Clickable){
-				clickables.add((Clickable)viewObjects.get(i));
-			}
-		}
-	}
-
-	public abstract void initAllObjects(ArrayList<Visible> viewObjects);
-
 }

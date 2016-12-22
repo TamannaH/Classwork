@@ -136,4 +136,9 @@ public abstract class Screen {
 	public MouseMotionListener getMouseMotionListener() {
 		return null;
 	}
+
+	public void addObject(Visible v) {
+		// TODO Auto-generated method stub
+		
+	}
 }

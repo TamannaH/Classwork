@@ -66,7 +66,7 @@ public class MovingComponent extends Component implements Runnable {
 			super.setY((int)posy);
 			g.setColor(Color.black);
 		}
-		fillOval(g);
+		FillOval(g);
 	}
 
 	public void FillOval (Graphics2D g) {

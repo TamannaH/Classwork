@@ -10,6 +10,7 @@ import guiPackage.Screen;
 import guiPackage.components.Action;
 import guiPackage.components.Button;
 import guiPackage.components.Graphic;
+import guiPackage.components.MovingComponent;
 import guiPackage.components.TextArea;
 import guiPackage.components.TextLabel;
 import guiPackage.components.Visible;
@@ -49,6 +50,12 @@ public class CoordinateScreen extends Screen implements MouseMotionListener, Mou
 		});
 		
 		picture = new Graphic(50, 50, .5, "resources/sampleImages/minion.jpg");
+		
+		MovingComponent mc = new MovingComponent(30, 60, 80, 80);
+		mc.setVy(3);
+		mc.play();
+		
+		viewObjects.add(mc);
 		viewObjects.add(picture);
 		viewObjects.add(label);
 		button.setSize(12);

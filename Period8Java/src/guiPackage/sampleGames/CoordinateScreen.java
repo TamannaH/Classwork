@@ -51,19 +51,19 @@ public class CoordinateScreen extends Screen implements MouseMotionListener, Mou
 		
 		picture = new Graphic(50, 50, .5, "resources/sampleImages/minion.jpg");
 		
-		MovingComponent mc = new MovingComponent(30, 60, 80, 80);
+		MovingComponent mc = new MovingComponent(30, 60, 40, 40);
 		mc.setVy(3);
 		mc.play();
 		
-		viewObjects.add(mc);
 		viewObjects.add(picture);
 		viewObjects.add(label);
 		button.setSize(12);
 		viewObjects.add(button);
-
-		goToFollower.setSize(12);
+//		viewObjects.add(goToFollower);
+//		goToFollower.setSize(12);
 		viewObjects.add(label);
-		viewObjects.add(goToFollower);
+	
+		viewObjects.add(mc);
 	}
 
 	@Override

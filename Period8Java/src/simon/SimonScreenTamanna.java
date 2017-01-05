@@ -3,6 +3,7 @@ package simon;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import guiPackage.components.Button;
 import guiPackage.components.TextLabel;
 import guiPackage.components.Visible;
 import guiPackage.sampleGames.ClickableScreen;
@@ -10,7 +11,7 @@ import guiPackage.sampleGames.ClickableScreen;
 public class SimonScreenTamanna extends ClickableScreen implements Runnable {
 	
 	public ArrayList<ButtonInterfaceTamanna> buttonList;
-	public ArrayList<MoveInterfaceTamanna> moveList;
+	public ArrayList<MoveInterfaceTamanna> sequence;
 	public ProgressInterfaceTamanna progress;
 	public TextLabel label;
 	public int roundNumber;
@@ -23,8 +24,8 @@ public class SimonScreenTamanna extends ClickableScreen implements Runnable {
 		roundNumber = 0;
 		sequenceIndex = 2;
 		
-		Thread play = new Thread(this);
-		play.start();
+		Thread app = new Thread(this);
+		app.start();
 	}
 
 	private void changeText(String s)
@@ -42,7 +43,7 @@ public class SimonScreenTamanna extends ClickableScreen implements Runnable {
 		sequenceIndex++;
 		changeText("Simon's Turn");
 		changeText("");
-		moveList.add(getAMove());
+		sequence.add(randomMove());
 		showMoves();
 		
 		changeText("Your Turn");
@@ -60,7 +61,7 @@ public class SimonScreenTamanna extends ClickableScreen implements Runnable {
 	}
 	
 	private void showMoves() {
-		for(MoveInterfaceTamanna move: moveList)
+		for(MoveInterfaceTamanna move: sequence)
 		{
 			try {
 				move.getButton().blink();
@@ -75,26 +76,42 @@ public class SimonScreenTamanna extends ClickableScreen implements Runnable {
 		return null;
 	}
 	
-	private MoveInterfaceTamanna getAMove() {
-		return null;
+	public void initAllObjects(ArrayList<Visible> viewObjects) {
+		buttonList = new ArrayList<ButtonInterfaceTamanna>();
+		sequence = new ArrayList<MoveInterfaceTamanna>();
+		getButtons();
+		
+		label = new TextLabel(130, 230, 300, 40, "Let's play Simon!");
+		progress = getProgress();
+		sequence.add(randomMove());
+		sequence.add(randomMove());
+		
+		roundNumber = 0;
+		viewObjects.add(progress);
+		viewObjects.add(label);
+	}
+
+	private MoveInterfaceTamanna randomMove() {
+		final ButtonInterfaceTamanna b = getAButton(null);
+		//code that randomly selects a ButtonInterfaceX
+		return getMove(b);
 	}
 	
+	private MoveInterfaceTamanna getMove(ButtonInterfaceTamanna b) {
+		return null;
+	}
+
+	/**
+	Placeholder until partner finishes implementation of ProgressInterface
+	*/
 	private ProgressInterfaceTamanna getProgress() {
 		return null;
 	}
 	
-	public void initAllObjects(ArrayList<Visible> viewObjects) {
-		buttonList = new ArrayList<ButtonInterfaceTamanna>();
-		moveList = new ArrayList<MoveInterfaceTamanna>();
-		getButtons();
-		
-		label = new TextLabel(0, 0, getWidth(), 200, "");
-		progress = getProgress();
-		moveList.add(getAMove());
-		moveList.add(getAMove());
-	}
-
 	private void getButtons() {
+		
+		int numberOfButtons = 4; 
+		
 		ButtonInterfaceTamanna button1 = getAButton(Color.red);
 		ButtonInterfaceTamanna button2 = getAButton(Color.blue);
 		ButtonInterfaceTamanna button3 = getAButton(Color.yellow);
@@ -105,9 +122,14 @@ public class SimonScreenTamanna extends ClickableScreen implements Runnable {
 		buttonList.add(button3);
 		buttonList.add(button4);
 		
-		add(button1);
-		add(button2);
-		add(button3);
-		add(button4);
+		addButton(button1);
+		addButton(button2);
+		addButton(button3);
+		addButton(button4);
+	}
+
+	private void addButton(ButtonInterfaceTamanna button1) {
+		// TODO Auto-generated method stub
+		
 	}
 }

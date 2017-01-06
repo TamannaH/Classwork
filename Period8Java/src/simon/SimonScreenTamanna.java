@@ -80,7 +80,10 @@ public class SimonScreenTamanna extends ClickableScreen implements Runnable {
 	}
 	
 	private ProgressInterfaceTamanna getProgress() {
-		return null;
+		
+		ProgressInterfaceTamanna progress = new Progress(0, 0, 300, 100, "", round, sequenceLength);
+		return progress;
+	
 	}
 	
 	public void initAllObjects(ArrayList<Visible> viewObjects) {

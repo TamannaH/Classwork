@@ -10,163 +10,162 @@ import guiPackage.components.Visible;
 import guiPackage.sampleGames.ClickableScreen;
 
 public class SimonScreenTamanna extends ClickableScreen implements Runnable {
-	public ArrayList<ButtonInterfaceTamanna> buttonList;
+	//public ArrayList<ButtonInterfaceTamanna> button;
+	private ButtonInterfaceTamanna[] button;
 	public ArrayList<MoveInterfaceTamanna> moveList;
 	public ArrayList<MoveInterfaceTamanna> sequenceOfMoves;
 	public ProgressInterfaceTamanna progress;
-	public TextLabel turn;
+	public TextLabel label;
 	public int roundNumber;
 	public int sequenceIndex;
-	public static boolean acceptingInput;
+	public static boolean acceptingInput;	
+	
+	private int lastSelectedButton;
 	
 	public SimonScreenTamanna(int width, int height) {
 		super(width, height);
-		roundNumber = 0;
-		sequenceIndex = 2;
-		
-		Thread play = new Thread(this);
-		play.start();
+		Thread app = new Thread(this);
+		app.start();
 	}
 
-	@Override
-	public void initAllObjects(ArrayList<Visible> viewObjects) {
-		buttonList = new ArrayList<ButtonInterfaceTamanna>();
-		moveList = new ArrayList<MoveInterfaceTamanna>();
-		sequenceOfMoves = new ArrayList<MoveInterfaceTamanna>();
-		getButtons();
-		
-		turn = new TextLabel(0, 0, getWidth(), 200, "");
-		progress = getProgress();
-		moveList.add(getMove());
-		moveList.add(getMove());
+	public void run() {
+		label.setText("");
+		nextRound();
 	}
 
-	private void getButtons() {
-		ButtonInterfaceTamanna button1 = getAButton(10, 150, 50, 50, Color.blue);
-		ButtonInterfaceTamanna button2 = getAButton(10, 150, 50, 50, Color.green);
-		ButtonInterfaceTamanna button3 = getAButton(10, 150, 50, 50, Color.red);
-		ButtonInterfaceTamanna button4 = getAButton(10, 150, 50, 50, Color.yellow);
+	public void nextRound() {
+		acceptingInput =false;
+		roundNumber ++;
+		sequenceOfMoves.add(randomMove());
+		//check
+		progress.setRound(roundNumber);
+		progress.setSequenceSize(sequenceOfMoves.size());
 		
-		buttonList.add(button1);
-		buttonList.add(button2);
-		buttonList.add(button3);
-		buttonList.add(button4);
-		
-		add(button1);
-		add(button2);
-		add(button3);
-		add(button4);
-	}
-	
-	private void add(ButtonInterfaceTamanna button1) {
-		// TODO Auto-generated method stub
-		
+		changeText("Simon's Turn");
+		label.setText("");
+		playSequence();
+		changeText("Your Turn");
+		acceptingInput = true;
+		sequenceIndex = 0;
 	}
 
-	private void changeText(String s)
-	{
-		try {
+	private void playSequence() {
+		ButtonInterfaceTamanna b = null;
+		for(int i = 0; i < sequenceOfMoves.size(); i++){
+			if(b != null) b.dim();
+			
+			b = sequenceOfMoves.get(sequenceIndex).getButton();
+			b.highlight();
+		
+			//10 seconds time
+			int sleepTime = 10000/roundNumber;
+			if(sleepTime<=0)sleepTime=2;
+			try {
+				Thread.sleep(sleepTime);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		b.dim();
+	}
+
+	private void changeText(String string) {
+		try{
+			label.setText(string);
 			Thread.sleep(1000);
-			turn.setText(s);
-		} catch (InterruptedException e) {
+		}catch(InterruptedException e){
 			e.printStackTrace();
 		}
 	}
-	
-	@Override
-	public void run() {
-		
-		acceptingInput = false;
+
+	public void initAllObjects(ArrayList<Visible> viewObjects) {
+		addButtons(viewObjects);
+		progress = getProgress();
+		label = new TextLabel(130,230,300,40,"Let's play Simon!");
 		sequenceOfMoves = new ArrayList<MoveInterfaceTamanna>();
-		newRound();
-		
-		changeText("Simon's Turn");
-		changeText("");
-		moveList.add(getMove());
-		showMoves();
-		
-		changeText("Your Turn");
-		acceptingInput = true;
-		
+		//add 2 moves to start
+		lastSelectedButton = -1;
+		sequenceOfMoves.add(randomMove());
+		sequenceOfMoves.add(randomMove());
+		roundNumber = 0;
+		viewObjects.add(progress);
+		viewObjects.add(label);
 	}
-	
-	private void newRound()
-	{
-		roundNumber++;
-		sequenceIndex ++;
+
+	public MoveInterfaceTamanna randomMove() {
+		ButtonInterfaceTamanna b = null;
+		int randNum = (int)(Math.random()*button.length);
 		
-		progress.setRound(roundNumber);
-		progress.setSequenceLength(sequenceIndex);
-	}
-	
-	private void showMoves() {
-		for(MoveInterfaceTamanna move: moveList)
-		{
-			try {
-				move.getButton().blink();
-				Thread.sleep(1000/roundNumber);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}	
-	}
-	
-	public void checkMove(MoveInterfaceTamanna move)
-	{
-		if(acceptingInput)
-		{
-			sequenceOfMoves.add(move);
-			if(sequenceOfMoves.equals(moveList.subList(0, sequenceOfMoves.size())))
-			{
-				move.getButton().blink();
-				if(sequenceOfMoves.equals(moveList))
-				{
-					Thread play = new Thread(this);
-					play.start();
-				}
-			}
-			else
-			{
-				acceptingInput = false;
-				changeText("You Lost!");
-			}
+		while(randNum == lastSelectedButton){
+			randNum = (int)(Math.random()*button.length);
 		}
-	}
-	
-	/**
-	Placeholder until partner finishes implementation of ProgressInterface
-	*/
-	private ProgressInterfaceTamanna getProgress() {
 		
-		ProgressInterfaceTamanna progress = new Progress(0, 0, 300, 100, "", roundNumber, sequenceIndex);
-		return progress;
-	
+		b = button[randNum];
+		lastSelectedButton = randNum;
+		return getMove(b);
 	}
-	
-	private ButtonInterfaceTamanna getAButton(int x, int y, int width, int height, Color color) {
-		ButtonInterfaceTamanna button = new Button(x, y, width, height, color);
-		button.setAction(new Action() {
-			public void act()
-			{
-				button.blink();
-				checkMove(new Move(button));
-			}
-		});
-		
-		return button;
+
+	public MoveInterfaceTamanna getMove(ButtonInterfaceTamanna b) {
+		return null;
 	}
-	
-	private MoveInterfaceTamanna getMove() {
-		MoveInterfaceTamanna move;
+
+	public ProgressInterfaceTamanna getProgress() {
+		//Partner's code
+		return null;
+	}
+
+	public void addButtons(ArrayList<Visible> viewObjects) {
+		int numOfButtons = 4;
+		Color[] colors= {Color.blue,Color.red, Color.yellow, Color.green};
 		
-		do
-		{
-			ButtonInterfaceTamanna randomButton = buttonList.get((int)  Math.random() * buttonList.size());
-			move = new Move(randomButton);
+		for(int i= 0; i < numOfButtons; i++){
 			
-		}while(!moveList.get(moveList.size() - 1).equals(move));
+			final ButtonInterfaceTamanna b = getAButton();
+			b.setColor(colors[i]);
+			b.setX(50);
+			b.setY(50);
+			
+			b.setAction(new Action(){
+				public void act() {
+					if(acceptingInput){
+						Thread blink = new Thread(new Runnable(){
+							public void run() {
+								b.highlight();
+								try {
+									Thread.sleep(800);
+									b.dim();
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+							
+						});
+						blink.start();
+					}
+				}
+				
+			});
+			
+			if (b == sequenceOfMoves.get(sequenceIndex)){
+				sequenceIndex++;
+			}
+			else{
+				progress.gameOver();
+			}
+			if (sequenceIndex == sequenceOfMoves.size()){
+				Thread nextRound = new Thread(SimonScreenTamanna.this);
+				nextRound.start();
+			}
+			viewObjects.add(b);
+		}
 		
-		return move;
+	}
+
+	private ButtonInterfaceTamanna getAButton() {
+		return null;
 	}
 }
 	

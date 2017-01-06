@@ -1,26 +1,37 @@
 package simon;
 
-import guiPackage.components.TextLabel;
+import java.awt.Graphics2D;
 
-public class Progress extends TextLabel implements ProgressInterfaceTamanna {
+import guiPackage.components.Component;
 
-	private int round;
-	private int sequenceLength;
-		
-	public Progress(int x, int y, int width, int height, String text, int round, int sequenceLength) {
-		super(x, y, width, height, text);
-		this.round = round;
-		this.sequenceLength = sequenceLength;
-	
-		setText("Round : " + round + ", " + "Sequence Length : " + sequenceLength);
+public class Progress extends Component implements ProgressInterfaceTamanna {
+
+	public Progress(int x, int y, int w, int h) {
+		super(x, y, w, h);
 	}
 
-	public void setRound(int round) {
-			this.round = round;
+	@Override
+	public void gameOver() {
+		// TODO Auto-generated method stub
+
 	}
-	
-	public void setSequenceLength(int sequenceLength) {
-		this.sequenceLength = sequenceLength;
+
+	@Override
+	public void setRound(int r) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setSequenceSize(int s) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void update(Graphics2D g) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

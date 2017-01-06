@@ -4,7 +4,8 @@ import guiPackage.components.Visible;
 
 public interface ProgressInterfaceTamanna extends Visible {
 	
-	void setRound(int round);
-	void setSequenceLength(int sequenceLength);
+	void gameOver();
+	void setRound(int r);
+	void setSequenceSize(int s);
 
 }

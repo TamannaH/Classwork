@@ -3,10 +3,10 @@ package WhackAMole;
 import java.util.ArrayList;
 import java.util.List;
 
+import guiPackage.ClickableScreen;
 import guiPackage.components.Action;
 import guiPackage.components.TextLabel;
 import guiPackage.components.Visible;
-import guiPackage.sampleGames.ClickableScreen;
 
 public class WhackAMoleScreen extends ClickableScreen implements Runnable{
 	

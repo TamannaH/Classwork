@@ -1,11 +1,10 @@
-package guiPackage.sampleGames;
+package guiPackage;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
-import guiPackage.Screen;
 import guiPackage.components.Clickable;
 import guiPackage.components.Visible;
 

@@ -3,11 +3,11 @@ package simon;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import guiPackage.ClickableScreen;
 import guiPackage.components.Action;
 import guiPackage.components.Button;
 import guiPackage.components.TextLabel;
 import guiPackage.components.Visible;
-import guiPackage.sampleGames.ClickableScreen;
 
 public class SimonScreenTamanna extends ClickableScreen implements Runnable {
 	//public ArrayList<ButtonInterfaceTamanna> button;

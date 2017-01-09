@@ -1,6 +1,7 @@
 package simon;
 
 import guiPackage.components.Component;
+
 import guiPackage.components.Action;
 
 import java.awt.Color;

@@ -3,14 +3,14 @@ package guiPackage.components;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class MovingComponent extends Component implements Runnable {
+public abstract class MovingComponent extends Component implements Runnable {
 	
-	private double vx;
-	private double vy;
-	private double posx;
-	private double posy;
+	private long moveTime; //time when the image last moved
+	private double vx; //the horizontal velocity
+	private double vy; //the vertical velocity
+	private double posx; //the actual x-coordinate of the object
+	private double posy; //the actual y-coordinate of the object
 	private boolean running;
-	private long moveTime; //the time when the image last moved
 	
 	public static final int REFRESH_RATE = 20;
 	
@@ -43,12 +43,7 @@ public class MovingComponent extends Component implements Runnable {
 		}
 	}
 
-	public  void checkBehaviors() {
-		if(getY() > 300){
-			setY(300);
-			vy *= -1;
-		}
-	}
+	public abstract void checkBehaviors();
 
 	public void update(Graphics2D g) {
 		long currentTime = System.currentTimeMillis();
@@ -69,10 +64,7 @@ public class MovingComponent extends Component implements Runnable {
 		drawImage(g);
 	}
 
-	public void drawImage(Graphics2D g) {
-		g.setColor(Color.black);
-		g.fillOval(0, 0, getWidth(), getHeight());
-	}
+	public abstract void drawImage(Graphics2D g);
 
 	public void setX(int x){
 		super.setX(x);

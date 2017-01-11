@@ -1,13 +1,18 @@
 package guiPackage.sampleGames;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 
 import guiPackage.Screen;
 import guiPackage.components.Action;
+import guiPackage.components.AnimatedComponent;
 import guiPackage.components.Button;
 import guiPackage.components.Graphic;
 import guiPackage.components.MovingComponent;
@@ -51,19 +56,53 @@ public class CoordinateScreen extends Screen implements MouseMotionListener, Mou
 		
 		picture = new Graphic(50, 50, .5, "resources/sampleImages/minion.jpg");
 		
-		MovingComponent mc = new MovingComponent(30, 60, 40, 40);
-		mc.setVy(3);
-		mc.play();
+//		MovingComponent mc = new MovingComponent(30, 60, 40, 40);
+//		mc.setVy(3);
+//		mc.play();
 		
-		viewObjects.add(picture);
-		viewObjects.add(label);
-		button.setSize(12);
-		viewObjects.add(button);
+		
+		
+//		viewObjects.add(picture);
+//		viewObjects.add(label);
+//		button.setSize(12);
+//		viewObjects.add(button);
 //		viewObjects.add(goToFollower);
 //		goToFollower.setSize(12);
-		viewObjects.add(label);
+//		viewObjects.add(label);
 	
-		viewObjects.add(mc);
+//		viewObjects.add(mc);
+		
+		addAnimation(viewObjects);
+	}
+
+	private void addAnimation(ArrayList<Visible> viewObjects) {
+		AnimatedComponent a = 
+				new AnimatedComponent(40, 50, 150, 150);	
+		try{
+			int numberInRow = 7;
+			int rows = 1;
+			int w = 261;
+			int h = 255;
+			
+			ImageIcon icon = new ImageIcon("resources/sampleImages/spritestrip.png");
+			//create a for loop that will take a
+			//"sub-image" from the sprite grid
+			for(int i = 0; i < numberInRow * rows; i++){
+				//declare the "cropped image"
+				BufferedImage cropped = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+				int leftMargin = 0;
+				int topMargin = 0;
+				int x1 = leftMargin + w*(i%numberInRow);
+				int y1 = topMargin + (i/numberInRow);
+				Graphics2D g = cropped.createGraphics();
+				g.drawImage(icon.getImage(), 0, 0, w, h, x1, y1, x1 + w, y1 + h, null);
+				a.addFrame(cropped, 20);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		viewObjects.add(a);
+		a.play();
 	}
 
 	@Override

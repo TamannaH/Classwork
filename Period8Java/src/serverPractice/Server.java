@@ -105,7 +105,7 @@ public class Server extends JFrame{
 		//waits for connection, after they do, socket is created, now it just tells you IP Address
 	}
 	
-	//get strwam to send and receive data
+	//get stream to send and receive data
 	private void setupStreams() throws IOException {
 		//after connected, it sets up stream
 		

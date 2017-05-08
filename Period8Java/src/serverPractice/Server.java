@@ -75,7 +75,7 @@ public class Server extends JFrame{
 					//eofException means end of a stream or end of a connection
 					
 					showMessage("\n Server ended the connection!");
-					//this isn't REALLy an error because you want this to show once someone leaves the conversation
+					//this isn't REALLy an, error because you want this to show once someone leaves the conversation
 				}finally{
 					closeCrap();
 				}

@@ -122,15 +122,76 @@ public class Server extends JFrame{
 		//now you can start a conversation
 	}
 	
-	private void whileChatting() {
-		
-	}
+	//code that runs while the people are chatting
+	private void whileChatting() throws IOException{
 	
-	private void showMessage(String string) {
+		String message = " You are now connected! "; //simple prompt on screen
+		sendMessage(message);
+		ableToType(true); //method to be created. The user is unable to type unless the person is connected to another person. This method will allow user to write in text box
 		
+		
+		do{ //do something while something is true…. Not the same as a while loop
+			try{
+				message = (String) input.readObject(); 
+					//viewing the object that comes into us through the stream and then put it into our message variable
+				showMessage("\n" + message);
+					//once you have your message, display it!
+			}catch(ClassNotFoundException classNotFoundException){
+				showMessage("\n hopefully this message never displays");
+				//this would be sent if the user sent something really weird like a weird symbol
+			}
+		}while(!message.equals("CLIENT - END")); //if a user type END then the conversation ends
 	}
-	
-	private void closeCrap() {
+	//difference between while and do while loop
+		//while you test your condition and then do something
+		//do while, you do something and then you test your condition at the end
 		
+	//close streams and sockets after you are done chatting
+	private void closeCrap(){
+		showMessage("\n Closing connections… \n"); // these type of messages are also like loading messages 
+		ableToType(false); //user cannot type while connections are being closed
+		try{
+			output.close(); //stream closed
+			input.close(); //stream closed
+			connection.close(); //closes the socket i.e. the main connection
+				//if you don’t close things you will waste memory on your server
+			//this is all you have to do! 
+		}catch(IOException ioException){
+			ioException.printStackTrace();
+	}
+		
+	//send a message to client (computer that is connected to the server)
+	private void sendMessage(String message){
+		
+		//whenever you want to send something you need a try catch
+		//then you output.writeObject(obj); to send the object which in this case is a string
+		
+		try{
+			output.writeObject("SERVER - " + message);
+				//sends a message through the output stream 
+				//we write server - here but this is just the username
+			output.flush(); 	
+				//good practice whenever you send something
+			showMessage("\nSERVER - " + message);
+				//we show the message because the user wants to see what he sent too
+		}catch(IOException ioException){
+			chatWindow.append("\n I can't send that message, hopefully you never see this error"); //append means stick this in the chat message
+		}
+	}
+		
+	
+	//only displays, does not send
+	//updates chatWindow
+	//allows us to update only the chatwindow and not the entire GUI
+	private void showMessage(final String text) {
+		SwingUtilities.invokeLater(
+				new Runnable(){
+					public void run(){
+						chatWindow.append(text); //adds a message to the end of the document and then updates chatWindow
+					}
+				}
+		);
+		//allows us to update only the chatwindow and not the entire GUI
+		//this creates a thread that updates a part of the GUI
 	}
 }
